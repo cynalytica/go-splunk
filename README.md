@@ -14,7 +14,7 @@ A simple and lightweight HTTP Splunk logging package for Go. Instantiates a logg
 ## Installation ##
 
 ```bash
-go get "github.com/cynalytica/Go-Splunk-HTTP/splunk"
+go get "github.com/cynalytica/go-splunk"
 ```
 
 ## Usage ##
@@ -26,7 +26,7 @@ For example:
 ```go
 package main
 
-import "github.com/cynalytica/Go-Splunk-HTTP/splunk"
+import "github.com/cynalytica/go-splunk"
 
 func main() {
 
