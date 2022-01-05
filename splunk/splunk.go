@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"github.com/google/uuid"
 	"io"
 	"io/ioutil"
 	"net/http"
@@ -43,6 +44,7 @@ type Client struct {
 	URL        string
 	Hostname   string
 	Token      string
+	UseIndexerAck    bool //Used for Channel Auth
 	Source     string //Default source
 	SourceType string //Default source type
 	Index      string //Default index
@@ -162,7 +164,9 @@ func (c *Client) doRequest(b *bytes.Buffer) error {
 	req, err := http.NewRequest("POST", url, b)
 	req.Header.Add("Content-Type", "application/json")
 	req.Header.Add("Authorization", "Splunk "+c.Token)
-
+	if c.UseIndexerAck == true {
+		req.Header.Add("X-Splunk-Request-Channel", uuid.NewString())
+	}
 	// receive response
 	res, err := c.HTTPClient.Do(req)
 	if err != nil {
