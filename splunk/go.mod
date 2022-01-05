@@ -1,3 +1,3 @@
-module github.com/cynalytica/Go-Splunk-HTTP/splunk
+module github.com/cynalytica/go-splunk
 
 go 1.14
