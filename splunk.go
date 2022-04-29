@@ -3,9 +3,9 @@ package Go_Splunk_HTTP
 import (
 	"bytes"
 	"crypto/tls"
-	"encoding/json"
 	"errors"
 	"fmt"
+	"github.com/goccy/go-json"
 	"github.com/google/uuid"
 	"io"
 	"io/ioutil"
@@ -40,14 +40,14 @@ func (t EventTime) MarshalJSON() ([]byte, error) {
 // The URL field must be defined and pointed at a Splunk servers Event Collector port (i.e. https://{your-splunk-URL}:8088/services/collector).
 // The Token field must be defined with your access token to the Event Collector.
 type Client struct {
-	HTTPClient *http.Client // HTTP client used to communicate with the API
-	URL        string
-	Hostname   string
-	Token      string
-	UseIndexerAck    bool //Used for Channel Auth
-	Source     string //Default source
-	SourceType string //Default source type
-	Index      string //Default index
+	HTTPClient    *http.Client // HTTP client used to communicate with the API
+	URL           string
+	Hostname      string
+	Token         string
+	UseIndexerAck bool   //Used for Channel Auth
+	Source        string //Default source
+	SourceType    string //Default source type
+	Index         string //Default index
 }
 
 // NewClient creates a new client to Splunk.
@@ -63,13 +63,13 @@ func NewClient(httpClient *http.Client, URL string, Token string, Source string,
 	}
 	hostname, _ := os.Hostname()
 	c := &Client{
-		HTTPClient: httpClient,
-		URL:        URL,
-		Hostname:   hostname,
-		Token:      Token,
-		Source:     Source,
-		SourceType: SourceType,
-		Index:      Index,
+		HTTPClient:    httpClient,
+		URL:           URL,
+		Hostname:      hostname,
+		Token:         Token,
+		Source:        Source,
+		SourceType:    SourceType,
+		Index:         Index,
 		UseIndexerAck: useAck,
 	}
 	return c

@@ -1,7 +1,7 @@
 package Go_Splunk_HTTP
 
 import (
-	"encoding/json"
+	"github.com/goccy/go-json"
 	"sync"
 	"time"
 )
